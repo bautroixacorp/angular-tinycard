@@ -1,0 +1,103 @@
+<div style="background-color: rgb(247,247,247);">
+  <div class="container pt-5">
+    <div class="row">
+      <!-- LEFT-PANEL-->
+      <div id="left-user-panel" class="col-lg-3 col-12 mb-3" style="position: sticky; position: -webkit-sticky;">
+        <div class="row">
+          <!-- card avatar -->
+          <div class="mb-3 col-lg-12 col-3">
+            <div class="w-100 card-cover px-0 py-0" style="overflow: hidden; height: auto;">
+              <img class="img-fluid w-100" [src]="this.deck.coverImage" alt="collection-img">
+            </div>
+          </div>
+          <!-- input text -->
+          <div id="left-input-text" class="col-lg-12 col-9">
+            <h2>{{this.deck.title}}</h2>
+            <p>{{this.deck.description}}</p>
+            <div class="row mt-3">
+              <div class="col pr-1">
+                <img style="height: 40px;" src="./images/purple-head.PNG" /> {{this.deck.author}}
+              </div>
+              <div class="col-auto pl-1">
+                <i class="far fa-star"></i> {{this.deck.numberOfUsers}}
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col pr-1">
+                <button class="btn btn-primary w-100" [class.btn-primary]="isFavourited" [class.btn-outline-primary]="!isFavourited" (click)="favourited()">
+                  <i class="fas fa-star"></i>{{isFavourited?"FAVORITED":"FAVORITE"}}</button>
+              </div>
+              <div class="col-auto pl-1">
+                <button [routerLink]="'/create/'+deck.id" class="btn btn-outline-primary">
+                  <i class="far fa-edit"></i>
+                </button>
+                <button class="btn btn-outline-primary" data-toggle="modal" data-target="#share-deck">
+                  <i class="fas fa-share-alt"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT-PANEL-->
+      <div id="right-content" class="col-lg col-12">
+        <div class="round-container">
+          <!-- tab-->
+          <nav>
+            <!-- tab btn -->
+            <div class="nav nav-tabs justify-content-center justify-content-sm-start" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active ml-sm-5 ml-0" id="nav-lessons-tab" data-toggle="tab" href="#nav-lessons" role="tab" aria-controls="nav-lessons"
+                aria-selected="true">Lessons</a>
+              <a class="nav-item nav-link ml-5" id="nav-cards-tab" data-toggle="tab" href="#nav-cards" role="tab" aria-controls="nav-cards"
+                aria-selected="false">Cards({{this.deck.cardArray.length}})</a>
+            </div>
+          </nav>
+          <!-- tab content-->
+          <div class="tab-content" id="nav-tabContent">
+            <!-- lessons tab-->
+            <div class="tab-pane fade show active" id="nav-lessons" role="tabpanel" aria-labelledby="nav-lessons-tab">
+              <div class="my-5 px-5">
+                <a [href]="'/learn/'+deck.id"><button class="btn btn-primary btn-block">START LESSON</button></a>
+              </div>
+              <p class="text-center">Tips: Click START LESSON to start study now</p>
+            </div>
+            <!-- cards tab-->
+            <div class="tab-pane fade" id="nav-cards" role="tabpanel" aria-labelledby="nav-cards-tab">
+              <div class="px-md-5 py-md-5 px-2 py-2">
+                <div *ngIf="deck.cardArray.length === 0" class="text-center" style="line-height: 300px; vertical-align: middle;">
+                  This deck has no card. Try to add more
+                </div>
+                <ng-container *ngFor="let thiscard of deck.cardArray">
+                  <app-decks-card [card]="thiscard" [cardArray]="deck.cardArray"></app-decks-card>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Share account model -->
+  <div class="modal fade" id="share-deck" tabindex="-1" role="dialog" aria-labelledby="share-deckTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          Chia sẻ bộ thẻ này:
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body text-center">
+          <input type="text" disabled class="form-control" [value]="'https://nhom-7-4.herokuapp.com/deck/'+this.deck.id" />
+        </div>
+        <div class="modal-footer border-0">
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="card-container flip-container d-inline-block">
+  <div class="flipper" (click)="flip()" [ngStyle]="{'transform': 'rotateY('+(this.showFront?'0':'180')+'deg)'}">
+    <ng-container *ngIf="card.front.type=='text'">
+      <div class="front card text-center" style="display:flex; justify-content: center; font-weight: bold;">
+        {{card.front.data}}
+      </div>
+    </ng-container>
+    <ng-container *ngIf="card.front.type=='image'">
+      <img class="card" [src]="card.front.data" alt="front-img">
+    </ng-container>
+
+
+    <div class="back card">
+      <ng-container *ngFor="let thisback of card.backArray">
+        <div class="w-100" style="overflow: hidden; display:flex; justify-content: center; flex-direction: column; padding: 0 15px;"
+          [ngStyle]="{'height' : ''+(100/card.backArray.length)+'%' }">
+
+          <div class="text-center">{{thisback.data}}</div>
+
+          <button type="button" class="close position-absolute" aria-label="Close" style="right: 5px; top: 0;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

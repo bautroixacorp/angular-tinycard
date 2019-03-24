@@ -1,0 +1,41 @@
+/* Mod's bootstrap css*/
+.bg-primary {
+    background: #32cdff !important;
+}
+
+a {
+    color: #32cdff;
+    font-weight: 500;
+}
+.btn-primary {
+    background-color: #32cdff;
+    border-color: #32cdff;
+}
+.btn-outline-primary {
+    color: #32cdff;
+    font-weight: 500;
+    background-color: transparent;
+    background-image: none;
+    border-color: #32cdff;
+}
+
+.btn.no-border {
+    border: 1px solid transparent!important;
+}
+
+/* Navbar */
+.navbar > .container > .nav-link.active {
+    border-bottom: 2px solid white !important;
+}
+
+#nav-search-pc > form > .form-control {
+    background-color: rgb(111, 220, 255);
+    border: 1px solid transparent;
+}
+#nav-search-pc > form > .form-control::placeholder {
+    color: white;
+}
+#nav-search-pc > form > .form-control:focus {
+    background-color: white;
+    color: black;
+}

@@ -1,0 +1,21 @@
+<div class="row px-md-5 py-md-5 px-2 py-2">
+    <!-- card collection image -->
+    <div class="col-lg-3 col-4 pr-1 pr-lg-2">
+        <div class="rounded w-100">
+            <img class="img-fluid rounded w-100" [src]="deck.coverImage" alt="collection-img">
+        </div>
+    </div>
+    <!-- collection info -->
+    <div class="col-lg-9 col-8 pl-1 pl-lg-2">
+        <h4>{{deck.title}}</h4>
+        <p> {{deck.description}}</p>
+        <p>
+            <i class="far fa-star"></i> {{deck.numberOfUsers}}
+            <i class="far fa-sticky-note"></i> {{deck.cardArray.length}}
+        </p>
+        <a [routerLink]="'/deck/'+deck.id " class="btn btn-outline-success" >Mở</a>
+        <a [routerLink]="'/create/'+deck.id " class="btn btn-outline-primary" >Chỉnh sửa</a>
+        
+
+    </div>
+</div>

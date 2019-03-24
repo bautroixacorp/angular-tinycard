@@ -1,0 +1,84 @@
+<div class="pt-4" style="background-color: rgb(247,247,247);">
+  <!-- MAIN -->
+
+  <div class="container">
+    <div class="row">
+      <!-- LEFT-PANEL-->
+      <div id="left-user-panel" class="col-lg-3 col-12 mb-3" style="position: sticky; position: -webkit-sticky;">
+        <div class="row">
+          <!-- card avatar -->
+          <div class="mb-3 col-lg-12 col-3">
+            <label for="img-cover" class=" w-100 card-cover">
+              <img *ngIf="deck.coverImage!='nulls'" [src]="deck.coverImage" class="w-100 card-cover"/>
+              <img *ngIf="deck.coverImage=='nulls'" src="./images/deskImg.png" class="w-100 card-cover"/>
+            </label>
+            <input id="img-cover" type="file" style="display: none;" accept="image/*" (change)="fileSelected($event.target.files[0])">
+          </div>
+          <!-- input text -->
+          <div id="left-input-text" class="col-lg-12 col-9">
+            <input class="form-control form-control-lg" type="text" placeholder="Enter title" [(ngModel)]="deck.title">
+            <input class="form-control mt-1" type="text" placeholder="Enter description (optional)" [(ngModel)]="deck.description">
+            <div class="row mt-3">
+              <div class="col-auto pr-1">
+                <button class="btn btn-outline-primary" data-toggle="modal" data-target="#deck-delete">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+              <div class="col pl-1">
+                <button (click)="submit()" class="btn btn-primary w-100">{{createNew?"CREATE":"UPDATE"}}</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT-PANEL-->
+      <div id="right-content" class="col-lg col-12">
+        <div class="round-container mt-0 position-relative">
+          <br>
+          <div *ngIf="deck.cardArray.length === 0" class="text-center" style="line-height: 300px; vertical-align: middle;">
+            Start adding cards here
+          </div>
+          <ng-container *ngFor="let thiscard of deck.cardArray">
+            <app-create-card (delete)="deleteCard($event)" (up)="moveUpCard($event)" (down)="moveDownCard($event)" (selectCard)="selectCard($event)" (selectCardImage)="selectCardImage($event)" (deleteCardImage)="deleteCardImage($event)" [card]="thiscard" [cardArray]="deck.cardArray"></app-create-card>
+          </ng-container>
+          <!-- add card LARGE SCREEN -->
+          <div class="position-absolute d-md-block d-none" style="right: 25px; top: 50px; ">
+            <button class="btn btn-primary position-fixed" style="border-radius: 50%; height: 50px; width: 50px;" (click)="addCard();">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+
+          <!-- add card SMALL SCREEN -->
+          <button class="btn btn-primary position-fixed d-md-none d-block" style="border-radius: 50%; right: 10px; bottom: 10px; height: 50px; width: 50px;"
+            (click)="addCard();">
+            <i class="fa fa-plus"></i>
+          </button>
+          <br>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Delete confirm model -->
+<div class="modal fade" id="deck-delete" tabindex="-1" role="dialog" aria-labelledby="deck-deleteTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header border-0">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body text-center">
+              Are you sure you want to delete this deck?
+          </div>
+          <div class="modal-footer border-0">
+              <a *ngIf= "this.deckID" class="btn btn-primary w-50" style="color: white;" (click)="deleteDeck();">Delete</a>
+              <a *ngIf= "!this.deckID" class="btn btn-primary w-50" style="color: white;" routerLink="/profile/">Delete</a>
+              <button type="button" class="btn btn-outline-secondary w-50" data-dismiss="modal">Cancel</button>
+          </div>
+      </div>
+  </div>
+</div>

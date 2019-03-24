@@ -1,0 +1,72 @@
+<div class="my-4 mx-0 py-2 row flex-row flex-nowrap justify-content-lg-center" style="overflow: auto; background: white;">
+    <!-- card number -->
+    <div class="col-auto" style="line-height: 257px; vertical-align: middle;">
+        {{getIndex(card.id)+1}}
+    </div>
+    <!-- front -->
+    <div class="col-auto position-relative">
+        <ng-container *ngIf="card.front.type=='text'">
+            <input type="text" class="form-control text-center card" placeholder="Front" [(ngModel)]="card.front.data">
+        </ng-container>
+        <ng-container *ngIf="card.front.type=='image'">
+            <img class="card" [src]="card.front.data" alt="front-img">
+        </ng-container>
+
+        <button class="close position-absolute" style="right: 30px; top: 2px;" (click)="selectFront(card.id)" data-toggle="modal"
+            data-target="#upload-image">
+            <i class="far fa-image"></i>
+        </button>
+    </div>
+    <!-- back -->
+    <div class="col-auto">
+        <div class="card position-relative">
+            <ng-container *ngFor="let thisback of card.backArray">
+                <app-backcard (delete)="deleteFact($event)" [backArray]="card.backArray" [back]="thisback" style="height: 100%;"></app-backcard>
+            </ng-container>
+        </div>
+        <button class="btn btn-outline-primary no-border w-100 mt-2" (click)="addFact()">Add fact</button>
+    </div>
+    <!-- action btn -->
+    <div class="col-auto" style="line-height: 257px; vertical-align: middle;">
+        <button class="btn btn-outline-primary d-block no-border" (click)="deleteCard()">
+            <i class="fas fa-trash"></i>
+        </button>
+        <button class="btn btn-outline-secondary d-block no-border" [class.disabled]="canUp()" (click)="moveUpCard()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        <button class="btn btn-outline-secondary d-block no-border" [class.disabled]="canDown()" (click)="moveDownCard()">
+            <i class="fas fa-arrow-down"></i>
+        </button>
+    </div>
+</div>
+
+
+<!-- Upload image model -->
+<div class="modal fade" id="upload-image" tabindex="-1" role="dialog" aria-labelledby="upload-imageTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                Tải lên hình ảnh
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body text-center">
+                <ng-container *ngIf="this.imagePreview!= 'nulls'">
+                    <img [src]="this.imagePreview" alt="imagePreviews" class="w-100 mb-2" />
+                </ng-container>
+                <input type="file" name="image" id="img-file" accept="image/*" (change)="fileSelected($event.target.files[0])" />
+                <input class="form-control" type="text" [(ngModel)]="imagePreview">
+            </div>
+            <div class="modal-footer border-0">
+                <ng-container *ngIf="this.imagePreview!= 'nulls'">
+                    <button (click)="confirmImage()" type="button" class="btn btn-primary w-50" data-dismiss="modal">Lựa chọn</button>
+                    <button (click)="deleteImage()" type="button" class="btn btn-secondary w-50" data-dismiss="modal">Xóa</button>
+                </ng-container>
+            </div>
+
+
+        </div>
+    </div>
+</div>

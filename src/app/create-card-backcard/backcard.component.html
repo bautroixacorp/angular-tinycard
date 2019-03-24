@@ -1,0 +1,9 @@
+<div class="position-absolute w-100" style="overflow: hidden;" [ngStyle]="{'height' : ''+(100/backArray.length)+'%' }">
+
+    <!-- <textarea class="form-control text-center" style="height: 100%;" [(ngModel)]="back.data"> </textarea> -->
+    <input type="text" class="form-control text-center card" style="height: 100%;" [(ngModel)]="back.data" [placeholder]="back.id===1?'Back':'Fact'">
+
+    <button type="button" (click)="deleteBack()" *ngIf="backArray.length>1" class="close position-absolute" aria-label="Close" style="right: 5px; top: 0;">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
