@@ -1,0 +1,16 @@
+/* Navbar */
+.navbar > .container > .nav-link.active {
+    border-bottom: 2px solid white !important;
+}
+
+#nav-search-pc > form > .form-control {
+    background-color: rgb(111, 220, 255);
+    border: 1px solid transparent;
+}
+#nav-search-pc > form > .form-control::placeholder {
+    color: white;
+}
+#nav-search-pc > form > .form-control:focus {
+    background-color: white;
+    color: black;
+}

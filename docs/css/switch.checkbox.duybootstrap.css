@@ -1,0 +1,32 @@
+/* checkbox SWITCH*/
+input[type="checkbox"] {
+    display:none;
+}
+input[type="checkbox"] + label .radio {
+    position: relative;
+    display:inline-block;
+    width:44px;
+    height:24px;
+    border-radius: 15px;
+    vertical-align:middle;
+    background: #c4c4c4;
+    cursor:pointer;
+}
+input[type="checkbox"]:checked + label .radio {
+    background: #32cdff;
+}
+
+input[type="checkbox"] + label .radio__circle {
+    margin: 0 2px;
+    position: absolute;
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    background: white;
+    top: 2px; /* height: (24-20)/2 */
+    left: 0;
+    transition:all 0.25s ease-in-out;
+}
+input[type="checkbox"]:checked + label .radio__circle {
+    left: 20px /*width: (44-20)px - 2*margin(2px) */
+}

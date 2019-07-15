@@ -1,0 +1,276 @@
+<!-- This file completely made by Phạm Ngọc Duy -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TinyCards -- Flash Cards by Duolingo</title>
+    <link rel="shortcut icon" type="image/png"
+        href="https://d17u0960v8a9bp.cloudfront.net/image/5c826d3d048819c3fc25ddaea0697433.png" />
+
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <script src="bootstrap/jquery.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="./js/jquery-3.3.1.min.js"></script>
+
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous"> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script> -->
+
+    <link rel="stylesheet" href="css/duybootstrap.css">
+    <link rel="stylesheet" href="css/navbar.duybootstrap.css">
+    <link rel="stylesheet" href="css/toptab.duybootstrap.css">
+    <link rel="stylesheet" href="css/create.css">
+    <script src="js/searchbar.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Phạm Ngọc Duy" />
+    <meta charset="UTF-8" />
+    <style>
+        h4 {
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+
+
+<body style="background-color: rgb(247,247,247);">
+    <div class="text-center bg-warning">
+        Try our AngularJS version ONLINE:
+        <a href="#">
+            <button class="btn btn-danger">NOT AVAILABLE</button>
+        </a>
+    </div>
+    <!-- NAV BAR -->
+    <div class="navbar navbar-dark row sticky-top text-center py-0 px-4 bg-primary" id="nav-bar">
+        <div class="container">
+            <a class="navbar-brand d-none d-lg-block col col-lg-auto order-lg-1" href="#">
+                <img src="images/logo-icon.png" alt="(*.*)">
+                <img src="images/logo-text.png" alt="TinyCards">
+            </a>
+            <!--home-->
+            <a class="col col-lg-auto order-1 order-lg-3 text-white nav-link nav-item py-3" id="nav-home" href="#.html">
+                <i class="fa fa-home"></i>
+                <span class="d-none d-lg-inline">HOME</span>
+            </a>
+            <!--search on mobile-->
+            <a id="nav-search-mobile" class="col col-lg-auto order-2 text-white d-lg-none d-block nav-link py-3"
+                onclick="showHideSearch();">
+                <span class="d-block d-lg-none">
+                    <i class="fa fa-search"></i>
+                </span>
+            </a>
+            <!-- search on PC -->
+            <div class="col col-lg-auto order-lg-2 mr-lg-auto d-none d-lg-block nav-link" id="nav-search-pc">
+                <form class="my-2 my-lg-0" style="position: relative;">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search"
+                        style="padding-left: 40px; padding-right: 40px;">
+                    <div style="position: absolute; top: 0 ; left: 15px; line-height: 38px; color: #32cdff;">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <div class="d-none d-lg-none" id="close-search"
+                        style="position: absolute; top: 0 ; right: 15px; line-height: 38px; color: #32cdff;"
+                        onclick="showHideSearch();">
+                        <i class="fa fa-times"></i>
+                    </div>
+                </form>
+            </div>
+            <!--create-->
+            <a class="col col-lg-auto order-3 order-lg-4 text-white nav-link active py-3" id="nav-create"
+                href="create.html">
+                <i class="fa fa-plus"></i>
+                <span class="d-none d-lg-inline">CREATE</span>
+            </a>
+            <!--profile-->
+            <a class="col col-lg-auto order-4 order-lg-5 text-white nav-link py-3" id="nav-profile"
+                href="profile__setting.html">
+                <i class="fa fa-user"></i>
+                <span class="d-none d-lg-inline">PROFILE</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- LEFT-PANEL-->
+            <div id="left-user-panel" class="col-lg-3 col-12 mb-3" style="position: sticky; position: -webkit-sticky;">
+                <div class="row">
+                    <!-- card avatar -->
+                    <div class="mb-3 col-lg-12 col-3">
+                        <label for="img-cover" class=" w-100 card-cover">
+                            <img src="./images/deskImg.png" class="w-100 card-cover" />
+                        </label>
+                        <input id="img-cover" type="file" style="display: none;" accept="image/*">
+                    </div>
+                    <!-- input text -->
+                    <div id="left-input-text" class="col-lg-12 col-9">
+                        <input class="form-control modern-form-control form-control-lg" type="text"
+                            placeholder="Enter title">
+                        <input class="form-control modern-form-control mt-1" type="text"
+                            placeholder="Enter description (optional)">
+                        <div class="row mt-3">
+                            <div class="col-auto pr-1">
+                                <button class="btn btn-outline-primary" data-toggle="modal" data-target="#deck-delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="col pl-1">
+                                <button class="btn btn-primary w-100">CREATE</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- RIGHT-PANEL-->
+            <div id="right-content" class="col-lg col-12">
+                <div class="round-container mt-0 position-relative">
+                    <br>
+                    <!-- Card edit 1 -->
+                    <div class="my-4 mx-0 py-2 row flex-row flex-nowrap justify-content-lg-center"
+                        style="overflow: auto; background: white;">
+                        <!-- card number -->
+                        <div class="col-auto" style="line-height: 257px; vertical-align: middle;">1 </div>
+                        <!-- front -->
+                        <div class="col-auto position-relative">
+                            <input type="text" class="form-control text-center card" placeholder="Front">
+
+                            <button class="close position-absolute" style="right: 30px; top: 2px;" data-toggle="modal"
+                                data-target="#upload-image">
+                                <i class="far fa-image"></i>
+                            </button>
+                        </div>
+                        <!-- back -->
+                        <div class="col-auto">
+                            <div class="card position-relative">
+                                <!-- <ng-container *ngFor="let thisback of card.backArray">
+                                    <app-backcard (delete)="deleteFact($event)" [backArray]="card.backArray"
+                                        [back]="thisback" style="height: 100%;"></app-backcard>
+                                </ng-container> -->
+                            </div>
+                            <button class="btn btn-outline-primary no-border w-100 mt-2">Add fact</button>
+                        </div>
+                        <!-- action btn -->
+                        <div class="col-auto" style="line-height: 257px; vertical-align: middle;">
+                            <button class="btn btn-outline-primary d-block no-border">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn btn-outline-secondary d-block no-border">
+                                <i class="fas fa-arrow-up"></i>
+                            </button>
+                            <button class="btn btn-outline-secondary d-block no-border">
+                                <i class="fas fa-arrow-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Card edit 2 -->
+                    <div class="my-4 mx-0 py-2 row flex-row flex-nowrap justify-content-lg-center"
+                        style="overflow: auto; background: white;">
+                        <!-- card number -->
+                        <div class="col-auto" style="line-height: 257px; vertical-align: middle;">2 </div>
+                        <!-- front -->
+                        <div class="col-auto position-relative">
+                            <input type="text" class="form-control text-center card" placeholder="Front">
+
+                            <button class="close position-absolute" style="right: 30px; top: 2px;" data-toggle="modal"
+                                data-target="#upload-image">
+                                <i class="far fa-image"></i>
+                            </button>
+                        </div>
+                        <!-- back -->
+                        <div class="col-auto">
+                            <div class="card position-relative"> </div>
+                            <button class="btn btn-outline-primary no-border w-100 mt-2">Add fact</button>
+                        </div>
+                        <!-- action btn -->
+                        <div class="col-auto" style="line-height: 257px; vertical-align: middle;">
+                            <button class="btn btn-outline-primary d-block no-border">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn btn-outline-secondary d-block no-border">
+                                <i class="fas fa-arrow-up"></i>
+                            </button>
+                            <button class="btn btn-outline-secondary d-block no-border">
+                                <i class="fas fa-arrow-down"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <!-- Upload image model -->
+                    <div class="modal fade" id="upload-image" tabindex="-1" role="dialog"
+                        aria-labelledby="upload-imageTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header border-0">
+                                    Tải lên hình ảnh
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body text-center">
+                                    <img src="./images/logo.png" alt="imagePreviews" class="w-100 mb-2" />
+                                    <input type="file" name="image" id="img-file" accept="image/*" />
+                                    <input class="form-control" type="text" value="./images/logo.png">
+                                </div>
+                                <div class="modal-footer border-0">
+                                    <button class="btn btn-primary w-50" data-dismiss="modal">Lựa chọn</button>
+                                    <button class="btn btn-secondary w-50" data-dismiss="modal">Xóa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- add card LARGE SCREEN -->
+                    <div class="position-absolute d-md-block d-none" style="right: 25px; top: 50px; ">
+                        <button class="btn btn-primary position-fixed"
+                            style="border-radius: 50%; height: 50px; width: 50px;">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <!-- add card SMALL SCREEN -->
+                    <button class="btn btn-primary position-fixed d-md-none d-block"
+                        style="border-radius: 50%; right: 10px; bottom: 10px; height: 50px; width: 50px;">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Delete confirm model -->
+    <div class="modal fade" id="deck-delete" tabindex="-1" role="dialog" aria-labelledby="deck-deleteTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    Are you sure you want to delete this deck?
+                </div>
+                <div class="modal-footer border-0">
+                    <a class="btn btn-primary w-50" style="color: white;">Delete</a>
+                    <button type="button" class="btn btn-outline-secondary w-50" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
